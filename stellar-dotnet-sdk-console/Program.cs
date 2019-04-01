@@ -18,12 +18,14 @@ namespace TestConsole
             Network.UseTestNetwork();
             using (var server = new Server("https://horizon-testnet.stellar.org"))
             {
-                //var friendBot = await server.TestNetFriendBot
-                //    .FundAccount(KeyPair.Random())
-                //    .Execute();
+                var friendBot = await server.TestNetFriendBot
+                    .FundAccount(KeyPair.Random())
+                    .Execute();
+                //bloklari okuma
+               // await GetLedgerTransactions(server);
+                //adrese ait transactionları getirme
+                await ShowAccountTransactions(server);
 
-                //await GetLedgerTransactions(server);
-                //await ShowAccountTransactions(server);
                 ShowTestKeyValue(server);
             }
 
@@ -56,7 +58,7 @@ namespace TestConsole
             Console.WriteLine("-- Show Ledger Transactions (ForLedger) --");
             // get a list of transactions that occurred in ledger 1400
             var transactions = await server.Transactions
-                .ForLedger(2365)
+                .ForLedger(80726)
                 .Execute();
 
             ShowTransactionRecords(transactions.Records);
